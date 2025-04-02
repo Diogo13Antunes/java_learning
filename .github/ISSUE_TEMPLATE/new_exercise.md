@@ -12,8 +12,8 @@ assignees: ''
 Describe what the student should do in this exercise. Be clear and concise.
 
 ## 🎯 Objectives
-- [ ] What does this exercise teach? (e.g., loops, object-oriented programming, exceptions)
-- [ ] Which concepts should be applied?
+- What does this exercise teach? (e.g., loops, object-oriented programming, exceptions)
+- Which concepts should be applied?
 
 ## 📌 Requirements
 1. The program must receive **[specific input]**.
