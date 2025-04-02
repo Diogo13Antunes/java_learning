@@ -1,4 +1,4 @@
-# Calculator Program - Java Exercise
+# Simple Calculator
 
 ## Description
 
