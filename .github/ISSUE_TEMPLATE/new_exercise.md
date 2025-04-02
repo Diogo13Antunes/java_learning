@@ -1,25 +1,36 @@
----
-name: 💻 Exercício de Java
-about: Sugira ou documente um exercício de programação em Java.
-title: "[EXERCÍCIO] Nome do exercício"
-labels: exercicio, java
-assignees: ''
+### 💻 **Java Exercise**
+**About:** Suggest or document a Java programming exercise.  
+**Title:** "[EXERCISE] Name of the exercise"  
+**Labels:** exercise, java  
+**Assignees:** ''
 
 ---
 
-## 📝 Descrição do Exercício
-Descreva o que o aluno deve fazer neste exercício. Seja claro e objetivo.
+## 📝 Exercise Description
+Describe what the student should do in this exercise. Be clear and concise.
 
-## 🎯 Objetivos
-- [ ] O que este exercício ensina? (exemplo: loops, orientação a objetos, exceções)
-- [ ] Quais conceitos devem ser aplicados?
+## 🎯 Objectives
+- [ ] What does this exercise teach? (e.g., loops, object-oriented programming, exceptions)
+- [ ] Which concepts should be applied?
 
-## 📌 Requisitos
-1. O programa deve receber **[entrada específica]**.
-2. O código deve utilizar **[técnicas ou conceitos obrigatórios]**.
-3. O resultado esperado deve ser **[descrição da saída esperada]**.
+## 📌 Requirements
+1. The program must receive **[specific input]**.
+2. The code should use **[mandatory techniques or concepts]**.
+3. The expected output should be **[description of the expected output]**.
 
-## 📥 Exemplo de Entrada
+## 📥 Example Input
 ```java
-// Exemplo de entrada fornecida pelo usuário
+// Example input provided by the user
 5
+```
+
+## 📤 Example Expected Output
+```java
+// Example of what the program should print
+The factorial of 5 is 120.
+```
+
+## 🔥 Extra Challenges (Optional)
+- [ ] Add error handling for invalid input.
+- [ ] Use functional programming (Streams, Lambdas).
+- [ ] Write automated tests to validate the solution.
