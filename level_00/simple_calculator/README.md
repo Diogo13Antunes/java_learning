@@ -85,7 +85,7 @@ The result of 5 / 4 is 1.25.
 
 1. **Run the Program**:
    ```bash
-   java main
+   java main.java
    ```
 
 ## License
