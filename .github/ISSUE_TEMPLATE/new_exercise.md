@@ -1,9 +1,9 @@
-### 💻 **Java Exercise**
-**About:** Suggest or document a Java programming exercise.  
-**Title:** "[EXERCISE] Name of the exercise"  
-**Labels:** exercise, java  
-**Assignees:** ''
-
+---
+name: "Java Exercise (Level 00-02)"
+about: "Suggest or document a Java programming exercise."
+title: "[EXERCISE] Name of the exercise"
+labels: exercise, java
+assignees: ''
 ---
 
 ## 📝 Exercise Description
