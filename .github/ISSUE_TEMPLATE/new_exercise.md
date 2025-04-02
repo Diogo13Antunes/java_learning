@@ -1,10 +1,12 @@
 ---
 name: "Java Exercise (Level 00-02)"
 about: "Suggest or document a Java programming exercise."
-title: "[EXERCISE] Name of the exercise"
+title: "[EXERCISE] - Level XX - Name of the exercise"
 labels: exercise, java
 assignees: ''
 ---
+
+## [EXERCISE NAME]
 
 ## 📝 Exercise Description
 Describe what the student should do in this exercise. Be clear and concise.
