@@ -83,7 +83,6 @@ The result of 5 / 4 is 1.25.
 
 ### Running the Program
 
-1. **Run the Program**:
-   ```bash
-   java main.java
-   ```
+```bash
+java main.java
+```
