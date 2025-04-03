@@ -87,7 +87,3 @@ The result of 5 / 4 is 1.25.
    ```bash
    java main.java
    ```
-
-## License
-
-This exercise is open source, licensed under the [LICENSE](LICENSE).
