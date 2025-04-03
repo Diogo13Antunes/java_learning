@@ -1,4 +1,4 @@
-# Java Study Repository
+# Java Learning
 
 This repository is dedicated to my Java studies. It contains various exercises categorized by difficulty levels.
 
