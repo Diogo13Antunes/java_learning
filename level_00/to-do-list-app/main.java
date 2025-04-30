@@ -1,4 +1,5 @@
 
+import java.lang.classfile.instruction.ThrowInstruction;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,7 +76,10 @@ class Task {
 	}
 
 	public String info() {
-		return "Name: " + this.name + "\nDescription: " + this.description;
+		String info = "";
+		info += "Name: " + this.name + "\n";
+		info += "Description: " + (this.description.isEmpty() ? "" : this.description) + "\n";
+		return info;
 	}
 
 	@Override
@@ -96,11 +100,11 @@ class TaskElementsValidator {
 			invalidReason = "Name cannot be empty.";
         }
 
-		if (isValid && (name.length() < 3 || name.length() > 100)) {
+		if (isValid && (name.length() < 3 || name.length() > 50)) {
 			isValid = false;
-			invalidReason = "Name must be between 3 and 100 characters long.";
+			invalidReason = "Name must be between 3 and 50 characters long.";
 		}
-		
+
 		if (isValid && !name.matches("^[A-Za-z0-9 ]+$")) {
 			isValid = false;
 			invalidReason = "Name can only contain letters, numbers, and spaces.";
@@ -125,8 +129,7 @@ class TaskElementsValidator {
 		String invalidReason = null;
 
 		if (description == null || description.trim().isEmpty()) {
-			isValid = false;
-			invalidReason = "Description cannot be empty.";
+			return true;
         }
 
 		if (isValid && (description.length() < 3 || description.length() > 500)) {
@@ -180,18 +183,56 @@ class Options {
 
 	public static void deleteTask(Map<String, Task> tasks) {
 		Cli.clear();
-		String taskId = Cli.input("Task ID: ");
-		Cli.debugPrint("Task to Delete: " + taskId + "\n");
+
+		if (tasks.isEmpty()) {
+			Cli.print("There is no tasks to remove.", true);
+			return ;
+		}
+
+		Options.listTasks(tasks);
+
+		String taskId = Cli.input("Task ID: ").trim();
+
+		if (tasks.containsKey(taskId)) {
+			tasks.remove(taskId);
+			Cli.print("Task with ID " + taskId + " deleted with success.", true);
+        }
+		else
+			Cli.print("Task ID " + taskId + " not found.", true);
 	}
 
 	public static void listTasks(Map<String, Task> tasks) {
+		Cli.clear();
 		if (!tasks.isEmpty()) {
+			System.out.printf("| %-36s | %-50s |%n", "ID", "Task Name");
+			Cli.print("| ==================================== | ================================================== |", true);
 			for (Map.Entry<String, Task> entry : tasks.entrySet()) {
-				Cli.print(entry.getKey() + ": " + entry.getValue(), true);
+				System.out.printf("| %-36s | %-50s |%n", entry.getKey(), entry.getValue());
 			}
+			Cli.print("| ==================================== | ================================================== |", true);
 		}
 		else
 			Cli.print("There is no tasks to do. 😁", true);
+	}
+
+	public static void viewTaskInfo(Map<String, Task> tasks) {
+		Cli.clear();
+
+		if (tasks.isEmpty()) {
+			Cli.print("There is no tasks to inspect.", true);
+			return ;
+		}
+
+		Options.listTasks(tasks);
+
+		String taskId = Cli.input("Task ID: ").trim();
+
+		if (tasks.containsKey(taskId)) {
+			Task task = tasks.get(taskId);
+			Cli.print(task.info(), true);
+        }
+		else
+			Cli.print("Task ID " + taskId + " not found.", true);
 	}
 }
 
@@ -204,7 +245,8 @@ class Menu {
 		this.options.put(1, "Add Task");
 		this.options.put(2, "Remove Task");
 		this.options.put(3, "List Task");
-		this.options.put(4, "Exit");
+		this.options.put(4, "View Task Info");
+		this.options.put(5, "Exit");
 		this.keysArray = this.options.keySet().stream().map(String::valueOf).toArray(String[]::new);
 
 		routine();
@@ -217,7 +259,7 @@ class Menu {
 			printHome();
 			int opt = Cli.menuOpt("Choose an option: ", this.keysArray);
 			Cli.debugPrint("OPT: " + opt + "\n");
-			if (opt == 4)
+			if (opt == 5)
 				break ;
 			execute(opt);
 			Cli.pressEnterToContinue();
@@ -237,6 +279,7 @@ class Menu {
 			case 1 -> Options.createTask(tasks);
 			case 2 -> Options.deleteTask(tasks);
 			case 3 -> Options.listTasks(tasks);
+			case 4 -> Options.viewTaskInfo(tasks);
 			default -> {}
 		}
 	}
