@@ -1,11 +1,15 @@
 
-import java.lang.classfile.instruction.ThrowInstruction;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 class Cli {
 	private static Scanner scanner = new Scanner(System.in);
@@ -69,17 +73,26 @@ class Cli {
 class Task {
 	private final String name;
 	private final String description;
+	private final String createdAt;
 
 	public Task(String name, String description) {
 		this.name = name;
 		this.description = description;
+		ZonedDateTime dateTime = Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		this.createdAt = dateTime.format(formatter);
 	}
 
 	public String info() {
 		String info = "";
 		info += "Name: " + this.name + "\n";
 		info += "Description: " + (this.description.isEmpty() ? "" : this.description) + "\n";
+		info += "Creation Date: " + this.createdAt + "\n";
 		return info;
+	}
+
+	public String getCreationDate() {
+		return this.createdAt;
 	}
 
 	@Override
@@ -204,12 +217,15 @@ class Options {
 	public static void listTasks(Map<String, Task> tasks) {
 		Cli.clear();
 		if (!tasks.isEmpty()) {
-			System.out.printf("| %-36s | %-50s |%n", "ID", "Task Name");
-			Cli.print("| ==================================== | ================================================== |", true);
+			System.out.printf("| %-36s | %-50s | %-13s |%n", "ID", "Task Name", "Creation Date");
+			Cli.print("| ==================================== | ================================================== | ============= |", true);
 			for (Map.Entry<String, Task> entry : tasks.entrySet()) {
-				System.out.printf("| %-36s | %-50s |%n", entry.getKey(), entry.getValue());
+				String id = entry.getKey();
+				Task task = entry.getValue();
+				String createdAt = task.getCreationDate();
+				System.out.printf("| %-36s | %-50s | %-13s |%n", id, task, createdAt);
 			}
-			Cli.print("| ==================================== | ================================================== |", true);
+			Cli.print("| ==================================== | ================================================== | ============= |", true);
 		}
 		else
 			Cli.print("There is no tasks to do. 😁", true);
@@ -258,7 +274,6 @@ class Menu {
 			Cli.clear();
 			printHome();
 			int opt = Cli.menuOpt("Choose an option: ", this.keysArray);
-			Cli.debugPrint("OPT: " + opt + "\n");
 			if (opt == 5)
 				break ;
 			execute(opt);
