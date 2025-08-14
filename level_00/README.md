@@ -11,7 +11,7 @@ This Java program is a simple calculator that performs basic arithmetic operatio
 
 ---
 
-## [Simple Task Manager](./simple_task_manager/)
+## [To Do List App](./to-do-list-app/)
 
 This Java program is a **Command-Line Task Manager** that allows the user to add, list, view, and delete tasks.
 Each task includes a **name**, an optional **description**, and a **creation date**. The program features input validation to ensure valid task names and descriptions, and generates a unique ID for each task.
